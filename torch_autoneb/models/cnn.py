@@ -37,7 +37,8 @@ class CNN(Module):
 
             if i % pool_every == pool_every - 1:
                 layer["maxpool"] = MaxPool2d(pool_size)
-                dims /= Tensor(pool_size).to(int64)
+                dims = dims / Tensor(pool_size)
+                dims = dims.to(int64)
 
             if batch_norm:
                 layer["batchnorm"] = BatchNorm2d(num_filters[i])
